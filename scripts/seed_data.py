@@ -8,9 +8,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
-from app.models import Base, User, Category, Product, OrderStatus
+from app.models import Base, User, Category, Product
 from decimal import Decimal
 from app.auth import get_password_hash
 

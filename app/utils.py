@@ -4,7 +4,7 @@
 
 from typing import List, TypeVar
 from sqlalchemy.orm import Query
-from app.schemas import PaginationParams, PaginationMeta, PaginatedResponse
+from app.schemas import PaginationParams, PaginationMeta
 
 T = TypeVar('T')
 

@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm, HTTPBearer, HTTPAuthoriz
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session, joinedload
-from typing import List, Optional
+from typing import Optional
 from decimal import Decimal
 from datetime import timedelta
 import uvicorn
@@ -13,9 +13,8 @@ from contextlib import asynccontextmanager
 from app.database import get_db, engine
 from app.models import Base, User, Category, Product, CartItem, Order, OrderItem, Review, OrderStatus
 from app.schemas import (
-    PaginationParams, PaginationMeta, PaginatedResponse,
-    UserRegister, UserLogin, Token,
-    UserCreate, UserUpdate, UserResponse, PasswordChange,
+    PaginationParams, UserRegister, Token,
+    UserUpdate, UserResponse, PasswordChange,
     CategoryCreate, CategoryUpdate, CategoryResponse,
     ProductCreate, ProductUpdate, ProductResponse,
     CartItemCreate, CartItemUpdate, CartItemResponse, CartResponse,
@@ -456,7 +455,7 @@ def delete_product(
     order_items_count = db.query(OrderItem).filter(OrderItem.product_id == product_id).count()
     if order_items_count > 0:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f"Cannot delete product: it is used in {order_items_count} order(s). Deactivate it instead."
         )
     

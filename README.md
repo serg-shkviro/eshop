@@ -18,15 +18,13 @@
 ## Быстрый старт
 
 ```bash
-# Запустить приложение и базу данных
-docker-compose up --build
+docker compose up --build
 
-# Выполнить миграции и заполнить данные
-docker-compose exec web alembic upgrade head
-docker-compose exec web python scripts/seed_data.py
+docker compose exec web alembic upgrade head
+docker compose exec web python scripts/seed_data.py
 ```
 
-Приложение будет доступно на `http://localhost:8000/docs`
+Приложение будет доступно на `https://localhost:8000/docs`
 
 ## Установка
 
@@ -65,8 +63,8 @@ SECRET_KEY=your-secret-key-change-this-in-production-please-make-it-secure
 
 **С Docker (рекомендуется):**
 ```bash
-docker-compose up --build
-docker-compose exec web alembic upgrade head
+docker compose up --build
+docker compose exec web alembic upgrade head
 ```
 
 **Локально:**
@@ -139,13 +137,9 @@ python -m uvicorn app.main:app --reload
 ## Миграции
 
 ```bash
-# Создать миграцию
 alembic revision --autogenerate -m "Описание изменений"
-
-# Применить миграции
 alembic upgrade head
 
-# Docker
 docker-compose exec web alembic revision --autogenerate -m "Описание"
 docker-compose exec web alembic upgrade head
 ```
@@ -171,10 +165,10 @@ docker-compose exec web alembic upgrade head
 ## Тестирование
 
 ```bash
-# Запустить все тесты
+# all test start
 pytest
 
-# С покрытием
+# with coverage
 pytest --cov=app
 ```
 
